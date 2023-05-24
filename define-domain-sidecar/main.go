@@ -8,11 +8,11 @@ import (
 	"net"
 	"os"
 
-	vmSchema "kubevirt.io/client-go/api/v1"
+	vmSchema "kubevirt.io/api/core/v1"
+	"kubevirt.io/client-go/log"
 	"kubevirt.io/kubevirt/pkg/hooks"
 	hooksInfo "kubevirt.io/kubevirt/pkg/hooks/info"
 	hooksV1alpha1 "kubevirt.io/kubevirt/pkg/hooks/v1alpha1"
-	"kubevirt.io/client-go/log"
 	domainSchema "kubevirt.io/kubevirt/pkg/virt-launcher/virtwrap/api"
 )
 

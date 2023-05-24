@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/libvirt/libvirt-go"
 	"github.com/spf13/pflag"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/watch"
+	"libvirt.org/go/libvirt"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"kubevirt.io/client-go/log"
 	"kubevirt.io/kubevirt/cmd/droidvirt-sidecar/proxy-sidecar/monitor"
-	"kubevirt.io/kubevirt/pkg/log"
 	"kubevirt.io/kubevirt/pkg/virt-launcher/virtwrap/api"
 )
 

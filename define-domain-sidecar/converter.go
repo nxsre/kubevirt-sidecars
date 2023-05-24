@@ -75,7 +75,7 @@ func convertDiskOptions(annotations map[string]string, domainSpec *domainSchema.
 		for idx, disk := range domainSpec.Devices.Disks {
 			if disk.Alias != nil {
 				for _, name := range names {
-					if name == disk.Alias.Name {
+					if name == disk.Alias.GetName() {
 						domainSpec.Devices.Disks[idx].Driver = &domainSchema.DiskDriver{
 							Name: "qemu",
 							Type: driverType,
@@ -94,7 +94,7 @@ func addQEMUArgs(annotations map[string]string, domainSpec *domainSchema.DomainS
 		args := []domainSchema.Arg{}
 		for _, arg := range strings.Split(qemuArgs, ";") {
 			args = append(args, domainSchema.Arg{
-					Value: arg,
+				Value: arg,
 			})
 		}
 		if domainSpec.QEMUCmd == nil {

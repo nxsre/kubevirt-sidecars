@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"kubevirt.io/kubevirt/pkg/log"
+	"kubevirt.io/client-go/log"
 )
 
 const (

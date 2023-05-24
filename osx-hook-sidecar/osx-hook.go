@@ -10,7 +10,7 @@ import (
 	"os"
 	"strings"
 
-	v1 "kubevirt.io/client-go/api/v1"
+	v1 "kubevirt.io/api/core/v1"
 	"kubevirt.io/client-go/log"
 	"kubevirt.io/kubevirt/pkg/hooks"
 	hooksInfo "kubevirt.io/kubevirt/pkg/hooks/info"
@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	hookName         = "osx-hook"
+	hookName = "osx-hook"
 )
 
 type infoServer struct{}

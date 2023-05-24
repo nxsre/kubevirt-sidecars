@@ -6,11 +6,11 @@ import (
 	"os"
 	"time"
 
-	libvirt "github.com/libvirt/libvirt-go"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/watch"
+	"libvirt.org/go/libvirt"
 
-	"kubevirt.io/kubevirt/pkg/log"
+	"kubevirt.io/client-go/log"
 	"kubevirt.io/kubevirt/pkg/virt-launcher/virtwrap/api"
 	virtcli "kubevirt.io/kubevirt/pkg/virt-launcher/virtwrap/cli"
 	domainerrors "kubevirt.io/kubevirt/pkg/virt-launcher/virtwrap/errors"
@@ -92,7 +92,7 @@ func lookupDomainInfo(conn virtcli.Connection, fullName string, uid types.UID) *
 			domain.SetState(util.ConvState(status), util.ConvReason(status, reason))
 		}
 
-		spec, err := util.GetDomainSpecWithRuntimeInfo(status, virtDomain)
+		spec, err := util.GetDomainSpecWithRuntimeInfo(virtDomain)
 		if err != nil {
 			// NOTE: Getting domain metadata for a live-migrating VM isn't allowed
 			if !domainerrors.IsNotFound(err) && !domainerrors.IsInvalidOperation(err) {
@@ -113,10 +113,11 @@ func lookupDomainInfo(conn virtcli.Connection, fullName string, uid types.UID) *
 
 // SubscribeDomainEvent :
 // connect to libvirt, register domain event
-// watch.Event{
-//   Type: watch.Deleted | watch.Added | watch.Modified
-//   Object: *api.Domain
-// }
+//
+//	watch.Event{
+//	  Type: watch.Deleted | watch.Added | watch.Modified
+//	  Object: *api.Domain
+//	}
 func SubscribeDomainEvent(domainConn virtcli.Connection, name string, namespace string, uid types.UID) chan watch.Event {
 	go func() {
 		for {

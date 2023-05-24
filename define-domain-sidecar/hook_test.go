@@ -6,7 +6,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"kubevirt.io/client-go/api/v1"
+	"kubevirt.io/api/core/v1"
 	hooksV1alpha1 "kubevirt.io/kubevirt/pkg/hooks/v1alpha1"
 	domainSchema "kubevirt.io/kubevirt/pkg/virt-launcher/virtwrap/api"
 )
@@ -65,7 +65,7 @@ func TestDefineVncWebSocket(t *testing.T) {
 	v1.SetObjectDefaults_VirtualMachineInstance(vmi)
 
 	annotations := map[string]string{
-		vncPortAnnotation: "5900",
+		vncPortAnnotation:          "5900",
 		vncWebsocketPortAnnotation: "5901",
 	}
 	vmi.SetAnnotations(annotations)
@@ -114,9 +114,7 @@ func TestDefineDiskDriver(t *testing.T) {
 						Type:  "raw",
 						Cache: "none",
 					},
-					Alias: &domainSchema.Alias{
-						Name: "test-disk",
-					},
+					Alias: domainSchema.NewUserDefinedAlias("test-disk"),
 				},
 			},
 		},
